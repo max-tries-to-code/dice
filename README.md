@@ -1,0 +1,2 @@
+# dice
+A Yahtzee game
