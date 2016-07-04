@@ -6,13 +6,21 @@
     function elt(name, attr) {
       var exp = document.createElement(name);
       if (attr) for (a in attr) exp.setAttribute(a, attr[a]);
-      for (var  i = 2; i < arguments.length; i++)
-        exp.appendChild(arguments[i]);
+      for (var  i = 2; i < arguments.length; i++) {
+        var child = arguments[i];
+        if (typeof child = "string") child = document.createTextNode(child);
+        exp.appendChild(child);
+      }
       return exp;
     }
+    var headers = ("Ones,Twos,Threes,Fours,Fives,Sixes,Sum,Bonus,Three of Kind,Four of Kind" + 
+                   "Full House,Small Straight,Large Straight,Yahtzee,Chance,Total").split(",");
     var game = function() {
       var dice = elt("div", {class: "dice"});
-      for (i = 0; i < 5; i++) dice.appendChild(elt("div",
+      var die = elt("div");
+      for (i = 0; i < 5; i++) dice.appendChild(die);
+      var table = elt("table");
+      headers.forEach(function(h) {table.appendChild(elt("tr", null, elt("td", h)))});
       return elt("div", {class: "game"}, dice, table);
     }
   </script>
